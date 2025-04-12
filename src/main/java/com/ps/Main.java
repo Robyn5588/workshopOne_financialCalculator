@@ -21,7 +21,7 @@ public class Main
 
 //        System.out.println("value of interest rate is: " + interestRate);
 
-        System.out.print("Enter the Duration of Time: ");
+        System.out.print("Enter the Duration of Years: ");
         int duration = scanner.nextInt();
 
         // Results are not put here because each case has 2 unique results
@@ -33,11 +33,15 @@ public class Main
                 float moPayments = (float) (principal * ( moInterestRate * Math.pow((1+moInterestRate),numMoPayments)) / (Math.pow((1 + moInterestRate), numMoPayments ) - 1));
                 float totalInterest = (moPayments * numMoPayments) - principal;
 
-                System.out.println("The total Monthly Payment is: $" + moPayments);
-                System.out.println("The total interest Rate is: $" + totalInterest);
+                System.out.println("The Total Monthly Payment is: $" + moPayments);
+                System.out.println("The Total Interest Rate is: $" + totalInterest);
                 break;
             case 2:
-                System.out.println("out of order");
+                float futureValue = (float) ( principal * Math.pow((1+(interestRate / 365)),(365 * duration)));
+                float interestEarned = (futureValue - principal);
+
+                System.out.println("The Future Value is: $" + futureValue);
+                System.out.println("The Interest Earned is: $" + interestEarned );
                 break;
             default:
                 System.out.println("Invalid option");
