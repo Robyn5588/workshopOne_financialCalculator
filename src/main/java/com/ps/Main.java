@@ -33,14 +33,30 @@ public class Main
                 float moPayments = (float) (principal * ( moInterestRate * Math.pow((1+moInterestRate),numMoPayments)) / (Math.pow((1 + moInterestRate), numMoPayments ) - 1));
                 float totalInterest = (moPayments * numMoPayments) - principal;
 
-
                 System.out.printf("%nThe Total Monthly Payment is: $%.2f%n", moPayments);
                 System.out.printf("The Total Interest Rate is: $%.2f%n", totalInterest);
                 break;
-            case 2: // WIP adding leap year calculations
-                float futureValue = (float) ( principal * Math.pow((1+(interestRate / 365)),(365 * duration)));
+            case 2: //  Added leap year calculations
+                System.out.print("\n Enter the Current Year: ");
+                int currentYear =  scanner.nextInt();
+                float futureValue = 0;
+                float currentAmount = principal;
+                int finalYear = currentYear + duration;
+                while (currentYear < finalYear)
+                {
+                    if (currentYear % 4 == 0)
+                    {
+                        futureValue = (float) (currentAmount * Math.pow((1 + (interestRate / 366)), (366)));
+                    }
+                    else
+                    {
+                        futureValue = (float) (currentAmount * Math.pow((1 + (interestRate / 365)), (365)));
+                    }
+                    currentAmount = futureValue;
+                    currentYear++;
+                }
+                //float futureValue = (float) ( principal * Math.pow((1+(interestRate / 365)),(365 * duration)));
                 float interestEarned = (futureValue - principal);
-
 
                 System.out.printf("%nThe Future Value is: $%.2f%n", futureValue);
                 System.out.printf("The Interest Earned is: $%.2f%n", interestEarned);
@@ -49,7 +65,6 @@ public class Main
                 int totalNumPeriod = 12 * duration;
                 float periodInterestRate = interestRate / 12;
                 float presentValue = (float) (principal * ((1 - Math.pow((1 + periodInterestRate), -totalNumPeriod)) / periodInterestRate));
-
 
                 System.out.printf("%nThe Present Value of the Annuity is: $%.2f%n", presentValue);
                 break;
